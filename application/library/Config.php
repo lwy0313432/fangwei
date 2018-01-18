@@ -71,7 +71,7 @@ class Config{
         'islogin',
         'logout',
         'admin_my_menu',
-        'usercenter_change_mypasswd',
+        'usercenter_changepasswd',
     );
     private static $routeRule=array(
         'hdgg_page'=>array(

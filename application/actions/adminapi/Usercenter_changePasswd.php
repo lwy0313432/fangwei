@@ -5,7 +5,7 @@
  * */
 
 /* vim:set ts=4 sw=4 et fdm=marker: */
-class Usercenter_change_my_passwdAction extends AdminApiBaseAction{
+class Usercenter_changePasswdAction extends AdminApiBaseAction{
     public function beforeExecute(){
     }
     public function run($arg=null){

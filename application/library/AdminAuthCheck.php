@@ -20,13 +20,13 @@ class AdminAuthCheck
         }
         $adminObj = new Dao_Default_AdminModel();
         $adminInfo = $adminObj->where(array('id'=>$adminId))->find();
+        if($adminInfo['role'] ==='super'){//超级管理员，拥有所有权限
+            return true;
+        }
         if(!$adminInfo ||!isset($adminInfo['authority']) ) {
             throw new CException(Errno::ADMIN_NOT_EXIST);
         }
 
-        if($adminInfo['role'] ==='super'){//超级管理员，拥有所有权限
-            return true;
-        }
         $authArr = explode(",",$adminInfo['authority']);
         if($authArr){
             foreach($authArr as $key=> $value){

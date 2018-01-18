@@ -20,8 +20,8 @@ class AdminapiController extends Yaf_Controller_Abstract{
         'authority_admin_list'=>'actions/adminapi/Authority_admin_list.php',
         'authority_admin_add'=>'actions/adminapi/Authority_admin_add.php',
         'authority_admin_getinfo'=>'actions/adminapi/Authority_admin_getinfo.php',
-        'authority_admin_update_admin'=>'actions/adminapi/Authority_admin_update_admin.php',
+        'authority_admin_update'=>'actions/adminapi/Authority_admin_update.php',
         'authority_admin_del'=>'actions/adminapi/Authority_admin_del.php',
-        'usercenter_change_my_passwd'=>'actions/adminapi/Usercenter_change_my_passwd.php',
+        'usercenter_changepasswd'=>'actions/adminapi/Usercenter_changePasswd.php',
     );
 }

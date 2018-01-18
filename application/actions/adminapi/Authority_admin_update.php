@@ -5,7 +5,7 @@
  * */
 
 /* vim:set ts=4 sw=4 et fdm=marker: */
-class Authority_admin_update_adminAction extends AdminApiBaseAction
+class Authority_admin_updateAction extends AdminApiBaseAction
 {
     protected function beforeExecute(){
     }
