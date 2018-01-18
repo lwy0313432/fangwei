@@ -13,6 +13,6 @@ class IndexController extends Yaf_Controller_Abstract {
      * 对于如下的例子, 当访问http://yourhost/personal_loan/index/index/index/name/www 的时候, 你就会发现不同
      */
     public $actions=array(
-        'index'=>'actions/index/Index.php',
+        'index'=>'actions/web/Index.php',
     );
 }

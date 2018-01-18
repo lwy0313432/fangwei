@@ -1,6 +1,1 @@
-<html>
-<body>
-<p>this is admin  index </p>
-<{$adminId}>
-</body>
-</html>
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>个贷管理平台</title><link href=/admin/static/css/app.e98dc8622bf1f2159cdc111c5d228353.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/admin/static/js/manifest.655e6baf8f74213a27d4.js></script><script type=text/javascript src=/admin/static/js/vendor.14a000aefabed0b07092.js></script><script type=text/javascript src=/admin/static/js/app.99166658675878480a3f.js></script></body></html>
