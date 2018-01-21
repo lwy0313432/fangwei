@@ -9,30 +9,19 @@
 class User{
     public static function getUidFromSession(){
         $uid = 0;
-        if(isset($_SESSION['uid']) && is_numeric($_SESSION['uid']) && $_SESSION['uid'] >0){
-            $uid=$_SESSION['uid'];
-        }
+        $session = Yaf_Session::getInstance();
+        $uid = $session->get('uid');
         return $uid;
     }
-    //app专用
-    public static function getUidFromCache($token){
-        if(!$token){
-            return intval($token);
-        }
-        $user_info=Tools::decry_lender_token($token);
-        return $user_info['uid'];
+    public static function createSession($uid){
+        $session = Yaf_Session::getInstance();
+        $session->set('uid',$uid);
     }
-    //校验用户邀请码是否真实有效
-    public static function checkRcode($r_code){
-        if(empty($r_code)){
-            throw new CException(Errno::USER_IS_RCODE_ERROR);
-        }
-        $dao_user=new Dao_Default_UserModel();
-        $user_info=$dao_user->where(array('mobile'=>$r_code))->find();
-        if(!$user_info){
-            throw new CException(Errno::USER_IS_RCODE_ERROR);
-        }
-        return $user_info;
+    
+    private static function destroy_session()
+    {   
+        $session = Yaf_Session::getInstance();
+        $session->del('uid');
     }
     //校验用户的短信验证码是否正确
      public static function checkSmsCode($mobile,$type,$sms_code){
@@ -79,7 +68,7 @@ class User{
          return $data;
      }
      //注册   
-     public static function addUser($mobile,$pass,$city_name,$r_code){
+     public static function addUser($mobile,$pass){
        if (!Tools::is_mobile($mobile)) {
             WLog::warning('mobile is error '.json_encode(array('mobile'=>$mobile)), array(), 'register');
             throw new CException(Errno::USER_IS_MOBILE_ERROR);
@@ -88,50 +77,22 @@ class User{
             WLog::warning('pass is error '.json_encode(array('pass'=>$pass)), array(), 'register');
             throw new CException(Errno::USER_IS_PASS_ERROR);
         }
-        if(empty($city_name)){
-            WLog::warning('city is error '.json_encode(array('city_name'=>$city_name)), array(), 'register');
-            throw new CException(Errno::USER_IS_CITY_ERROR);
-        }
+
         //校验手机号是否已注册
         self::getUidByMobile($mobile);
-        $parent_info=array();
-        if($r_code){
-            $parent_info=self::checkRcode($r_code);
-        }
-        $pid=isset($parent_info['id'])?$parent_info['id']:0;
         $dao_user=new Dao_Default_UserModel();
-        $dao_user_agent=new Dao_Default_UserAgentModel();
         $in_user_arr=array(
-            'username'=>$mobile,//现在先默认为手机号
             'password'=>md5($pass),
             'mobile'  =>$mobile,
-            'city'    =>$city_name,
-            'is_close'=>Config::USER_TYPE_IS_CLOSE,//默认为开启状态
             'dt'      =>date('Y-m-d H:i:s'),
         );
-        $dao_user->start_trans();
         $in_user_id=$dao_user->Insert($in_user_arr);        
         if(!$in_user_id){
             WLog::warning('in user is error '.json_encode(array('in_data'=>$in_user_arr)), array(), 'register');
-            $dao_user->rollback();
             throw new CException(Errno::USER_IS_REGISTER_ERROR);
         }
-        $in_agent_arr=array(
-            'user_id'=>$in_user_id,
-            'pid'    =>$pid,
-            'dt'     =>date('Y-m-d H:i:s'),
-        );
-        $in_agent=$dao_user_agent->Insert($in_agent_arr);
-        if(!$in_agent){
-            WLog::warning('in user is error '.json_encode(array('in_data'=>$in_agent_arr)), array(), 'register');
-            $dao_user->rollback();
-            throw new CException(Errno::USER_IS_REGISTER_ERROR);
-        }
-        $dao_user->commit();
         //注册成功以后 给用户生成token=返回给app
-        $token_info=Tools::encrypt_lender_token($in_user_id, $mobile);
-        $data['token']    =$token_info['token'];
-        return $data; 
+        return array('uid'=>$in_user_id); 
      }
      //找回密码
      public static function forgetPwd($mobile,$new_pass){

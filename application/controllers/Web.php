@@ -5,9 +5,10 @@
  *    * */
 class WebController extends Yaf_Controller_Abstract{
     public $actions=array(
-        'contest_join'=>'actions/web/Contest_join.php',
-        'pay_show'=>'actions/web/Pay_show.php',
         'index'=>'actions/web/Index.php',
+        'show_regist'=>'actions/web/Show_regist.php',
+        'do_regist'=>'actions/web/Do_regist.php',
+        'check_qrcode'=>'actions/web/Check_qrcode.php',
     );
 }
 /* vim:set ts=4 sw=4 et fdm=marker: */
