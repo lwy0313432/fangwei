@@ -30,10 +30,6 @@ abstract class WebBaseAction extends Yaf_Action_Abstract{
         }
     }
     protected function beforeExecute(){
-        if($this->current_controller =='uc' && ! $this->uid){
-            header('location:/');
-        }
-        return true;
     }
     protected function afterExecute(){
         return true;

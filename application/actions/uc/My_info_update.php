@@ -10,7 +10,7 @@ class My_info_updateAction extends WebBaseAction{
     public function beforeExecute(){
         $this->uid = $this->getUid();
         if(!$this->uid){
-            header('location:/');
+            header('location:/web/show_login');
             die;
         }
     }

@@ -5,18 +5,15 @@
  *    * */
 
 /* vim:set ts=4 sw=4 et fdm=marker: */
-class IndexAction extends WebBaseAction{
+class Show_myAction extends WebBaseAction{
     public $uid=0;
     public function beforeExecute(){
         $this->uid=$this->getUid();
-        if(!$this->uid){
-            header("Location:/web/show_login");
-            die;
+        if($this->uid){ //已经登录的情况下，就跳到首页吧
+            //header("Location:/");
         }
     }
     public function run($args=null){
-        $uid = $this->uid;
-        $this->data = User::getUserInfo($uid);
-        var_export($this->data);
+        $this->display('web/show_my.tpl');
     }
 }

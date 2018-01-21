@@ -1,4 +1,4 @@
-<{include file="web/header_menu.tpl"}>
+<{include file="header_menu.tpl"}>
     <div  class="sbanner" style='height:220px;background:url(/images/b2.jpg) no-repeat center  0' ></div>
     <div style='clear:both;height:15px;'></div>
 
@@ -103,4 +103,4 @@
             </div>
         </div>
     </div>
-<{include file="web/footer.tpl"}>
+<{include file="footer.tpl"}>

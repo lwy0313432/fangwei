@@ -17,6 +17,7 @@ class My_infoAction extends WebBaseAction{
     public function run($args=null){
         $uid = $this->uid;
         $this->data = User::getUserInfo($uid);
-        var_export($this->data);
+	$this->display('uc/my_info.tpl');
+   //     var_export($this->data);
     }
 }

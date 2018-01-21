@@ -1,4 +1,4 @@
-    <{include file="web/header.tpl"}>
+    <{include file="header.tpl"}>
     <div  class="login">
         <div style='clear:both;height:64px;'></div>
         <div  class="login-1">
@@ -37,4 +37,4 @@
         </div>
         
     </div>
-    <{include file='web/footer.tpl'}>
+    <{include file='footer.tpl'}>

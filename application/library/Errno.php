@@ -70,7 +70,10 @@ class Errno
     const USER_INFO_TYPE_ERR              = 400033; //user_info type错误
     const USER_INFO_PRODUCT_ERR           = 400034;//user_info表produce参赛错误
     const USER_COMPANY_ID_NO_ERR          = 400035; //公司营业执照号错误
-
+    const USER_INFO_AUDIT_STATUS_ERR        =400036; // 用户资料未审核通过
+    const USER_PRODUCE_LEVEL_INVALID        =400037; //用户产品防伪级别参数不合法
+    const USER_PRODUCE_DUE_YIELD_INVALID    =400038; //用户产品预计年产量参数不合法
+    const USER_PRODUCE_PRODUCT_INVALID      =400039; // 用户产品名称不合法
     
 
     const ADMIN_NOT_EXIST = 500001;   
@@ -179,6 +182,10 @@ class Errno
         self::USER_INFO_TYPE_ERR            =>'user_info type 错误',
         self::USER_INFO_PRODUCT_ERR         =>'user_info product 错误',
         self::USER_COMPANY_ID_NO_ERR        =>'user_info 营业执照号错误',
+        self::USER_INFO_AUDIT_STATUS_ERR    =>'用户资料未审核通过',
+        self::USER_PRODUCE_LEVEL_INVALID    =>'用户产品防伪级别参数不合法',
+        self::USER_PRODUCE_DUE_YIELD_INVALID=>'用户产品预计年产量参数不合法'
+        self::USER_PRODUCE_PRODUCT_INVALID  ='用户产品名称不合法', 
     );
     public static function getMessage($code){
         $message = '';

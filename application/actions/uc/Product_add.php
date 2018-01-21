@@ -5,7 +5,7 @@
  *    * */
 
 /* vim:set ts=4 sw=4 et fdm=marker: */
-class IndexAction extends WebBaseAction{
+class Product_addAction extends WebBaseAction{
     public $uid=0;
     public function beforeExecute(){
         $this->uid=$this->getUid();
@@ -15,8 +15,7 @@ class IndexAction extends WebBaseAction{
         }
     }
     public function run($args=null){
-        $uid = $this->uid;
-        $this->data = User::getUserInfo($uid);
-        var_export($this->data);
+        $ret = Product::productAdd($this->uid,$_REQUEST);
     }
+
 }

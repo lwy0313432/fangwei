@@ -1,4 +1,4 @@
-    <{include file='web/header_menu.tpl'}>
+    <{include file='header_menu.tpl'}>
     <div  class="banner">
         <div  class="hd">
             <ul>
@@ -111,4 +111,4 @@
       
         </div>
     </div>
-    <{include file='web/footer.tpl'}>
+    <{include file='footer.tpl'}>
