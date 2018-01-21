@@ -13,7 +13,9 @@ class ApiController extends Yaf_Controller_Abstract{
     }
      */
     public $actions=array(
-        'index'      =>'actions/api/Index.php',
-
+        'index'     =>'actions/api/Index.php',
+        'login'     =>'actions/api/Login.php',
+        'logout'    =>'actions/api/Logout.php',
+        'is_login'  =>'actions/api/Is_login.php',
     );
 }

@@ -18,7 +18,7 @@ class User{
         $session->set('uid',$uid);
     }
     
-    private static function destroy_session()
+    public static function destroySession()
     {   
         $session = Yaf_Session::getInstance();
         $session->del('uid');
@@ -45,16 +45,20 @@ class User{
          return true;
      }
      //登录
-     public static function login($username,$pass){
-         if(empty($username)){
-             throw new CException(Errno::USER_IS_USERNAME_ERROR);
+     public static function login($mobile,$pass,$vcode){
+
+         if(empty($mobile) || !Tools::is_mobile($mobile)){
+             throw new CException(Errno::USER_IS_MOBILE_ERROR);
          }
          if(empty($pass)){
-             throw new CException(Errno::USER_IS_USERNAME_ERROR);
+             throw new CException(Errno::USER_IS_PASS_ERROR);
+         }
+         if(!self::checkVcode($vcode)){
+            throw new CException(Errno::VCODE_ERR);
          }
          $dao_user=new Dao_Default_UserModel();
          $where_arr=array(
-             'username'=>$username,
+             'mobile'=>$mobile,
              'password'=>md5($pass),
          );
          $user_info=$dao_user->where($where_arr)->find();
@@ -63,9 +67,41 @@ class User{
              throw new CException(Errno::USER_IS_USERNAME_ERROR);
          }
          //登录成功以后 给用户生成token=返回给app
-         $token_info=Tools::encrypt_lender_token($user_info['id'], $user_info['mobile']);
-         $data['token']    =$token_info['token'];
-         return $data;
+         self::createSession($user_info['id']);
+         return array('user_info'=>$user_info);
+     }
+     public static function isLogin($uid){
+        $userInfo = self::getUserInfo($uid);
+        if(!$userInfo){
+            return array('isLogin'=>'no','userInfo'=>$userInfo);
+        }
+        return array('isLogin'=>'yes','userInfo'=>$userInfo);
+     }
+     public static function getUserInfo($uid){
+        $dao_user=new Dao_Default_UserModel();
+        $daoUserInfo = new Dao_Default_UserInfoModel();
+        $uid=intval($uid);
+        if(!$uid){
+            return array();
+        }
+        $user=$dao_user->where(array('id'=>$uid))->find();
+        $userInfo = $daoUserInfo->where(array("user_id"=>$uid))->find();
+        if(!$user){
+            return array();
+        }
+        $user['other_info'] = $userInfo; 
+        return $user;
+     }
+     private static function checkVcode($vcode){
+         $sessVcode=isset($_SESSION['vcode'])? $_SESSION['vcode'] : null;
+         unset($_SESSION['vcode']);
+         if(!isset($sessVcode)){
+            return false;
+         }
+         if($vcode !=$sessVcode){
+            return false;
+         }
+         return true;
      }
      //注册   
      public static function addUser($mobile,$pass){
@@ -94,6 +130,57 @@ class User{
         //注册成功以后 给用户生成token=返回给app
         return array('uid'=>$in_user_id); 
      }
+     //更新user_info表的记录
+     public static function updateUserInfo($uid,$param){
+         $uid= intval($uid);
+         $dao_user = new Dao_Default_UserModel();
+
+         $dao_user_info = new Dao_Default_UserInfoModel();
+         $user = $dao_user->where(array("id"=>$uid))->find();
+         if(!$user){
+            throw new CException(Errno::USER_NOT_EXIST);
+         }
+         $type = isset($param['type']) ? $param['type'] : '' ;
+         $real_name = isset($param['real_name']) ? $param['real_name'] : '' ;
+         $id_no = isset($param['id_no']) ? $param['id_no'] : '' ;
+         $address = isset($param['address']) ? $param['address'] : '' ;
+         $email = isset($param['email']) ? $param['email'] : '' ;
+         $product_type = isset($param['product_type']) ? $param['product_type'] : '' ;
+         if($type !='company' && $type!='individal'){ //type必须未公司或个人
+            throw new CException(Errno::USER_INFO_TYPE_ERR);
+         }
+         $product_type = intval($product_type);
+         if($product_type >9 || $product_type <=0 ){ //type必须未公司或个人
+            throw new CException(Errno::USER_INFO_PRODUCT_ERR);
+         }
+         if ( $type =='company' &&  !Tools::is_company_id_no($id_no) ){
+             echo $id_no;
+            throw new CException(Errno::USER_COMPANY_ID_NO_ERR);
+         }
+         if ( $type =='individal' &&  !Tools::is_id_card_num($id_no) ){
+            throw new CException(Errno::USER_ID_NO_IS_ERROR);
+         }
+         $user_info = $dao_user_info->where(array("user_id"=>$uid))->find();
+         $arr_up = array(
+             'type'=>$type,
+             'real_name'=>addslashes($real_name),
+             'id_no'=>$id_no,
+             'address'=>addslashes($address),
+             'email'=>addslashes($email),
+             'product_type'=>$product_type,
+             'dt'=>date("Y-m-d H:i:s"),
+         );
+         if(!$user_info){ //新增
+             $arr_up['user_id']=$uid;
+             $ret = $dao_user_info->insert($arr_up);
+         }else{
+            $ret = $dao_user_info->update(array("user_id"=>$uid),$arr_up);
+         }  
+         if(!$ret){
+            throw new CException(Errno::DB_ERROR);
+         }
+         return true;
+     }
      //找回密码
      public static function forgetPwd($mobile,$new_pass){
          if (!Tools::is_mobile($mobile)) {
@@ -121,20 +208,7 @@ class User{
          }
          return true;
      }
-     //根据uid获取用户的基本信息
-     public static function getUserInfo($uid){
-         $uid=intval($uid);
-         if($uid==0){
-             throw new CException(Errno::PARAM_INVALID);
-         }
-         $dao_user      = new Dao_Default_UserModel();
-         $user_info=$dao_user->where(array('id'=>$uid))->find();
-         if(!$user_info){
-             throw new CException(Errno::USER_IS_NO_LOGIN_ERROR);
-         }
-         return $user;
-         
-     }
+
      //重置密码
      public static function resetPwd($uid,$old_pass,$new_pass){
          $uid=intval($uid);

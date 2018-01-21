@@ -5,7 +5,7 @@
  * */
 
 /* vim:set ts=4 sw=4 et fdm=marker: */
-abstract class ApiBaseaction extends Yaf_Action_Abstract{
+abstract class ApiBaseAction extends Yaf_Action_Abstract{
     abstract public function run($args=null);
     protected $code     = Errno::SUCCESS;
     protected $message  = '';
@@ -24,8 +24,7 @@ abstract class ApiBaseaction extends Yaf_Action_Abstract{
         //app统一验签--test中
         //Util_Sign::get_app_params_sign($_POST);
         //在这直接把uid
-        $token=$this->getRequestParam('token', 0);
-        $this->uid = User::getUidFromCache($token);
+        $this->uid = User::getUidFromSession();
         if (Util::isProductEnv()) {
             $method = $this->getRequest()->getMethod();
             if ($method != 'POST') {

@@ -66,7 +66,10 @@ class Errno
 	const USER_EMAIL_IS_ERROR             = 400029;//邮箱格式不正确
 	const USER_UPLOAD_FILE_IS_ERROR       = 400030;//上传图片格式不正确
 	const USER_UPLOAD_IMG_IS_ERROR        = 400031;//上传图片失败
-	
+    const USER_NOT_EXIST                  = 400032; //用户不存在
+    const USER_INFO_TYPE_ERR              = 400033; //user_info type错误
+    const USER_INFO_PRODUCT_ERR           = 400034;//user_info表produce参赛错误
+    const USER_COMPANY_ID_NO_ERR          = 400035; //公司营业执照号错误
 
     
 
@@ -172,6 +175,10 @@ class Errno
         self::USER_ID_NO_IS_ERROR           =>'身份证格式错误',
         self::USER_UPLOAD_FILE_IS_ERROR     =>'上传图片格式不正确',
         self::USER_UPLOAD_IMG_IS_ERROR      =>'上传图片失败',
+        self::USER_NOT_EXIST                =>'用户不存在',
+        self::USER_INFO_TYPE_ERR            =>'user_info type 错误',
+        self::USER_INFO_PRODUCT_ERR         =>'user_info product 错误',
+        self::USER_COMPANY_ID_NO_ERR        =>'user_info 营业执照号错误',
     );
     public static function getMessage($code){
         $message = '';

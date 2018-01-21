@@ -80,7 +80,6 @@ class Tools
             return false;
         }
     }
-
     public static function is_mobile($str)
     {
         return preg_match('/^1\d{10}$/', $str);
@@ -160,6 +159,15 @@ class Tools
         return preg_match('/^[0-9a-f]{32}$/i', $str);
     }
 
+    //公司营业执照
+    public static function is_company_id_no($id_no){
+        if( preg_match('/^[0-9A-Za-z]+$/', $id_no)){
+            if(strlen($id_no) ==15 || strlen($id_no) ==18){
+                return true;
+            }
+        }
+        return false;
+    }
     public static function is_flag($flag)
     {
         return preg_match('/^[-0-9A-Za-z_]+$/', $flag);
