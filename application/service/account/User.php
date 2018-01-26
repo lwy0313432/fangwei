@@ -104,7 +104,7 @@ class User{
          return true;
      }
      //注册   
-     public static function addUser($mobile,$pass){
+     public static function addUser($mobile,$pass,$mobile_code){
        if (!Tools::is_mobile($mobile)) {
             WLog::warning('mobile is error '.json_encode(array('mobile'=>$mobile)), array(), 'register');
             throw new CException(Errno::USER_IS_MOBILE_ERROR);
@@ -113,7 +113,31 @@ class User{
             WLog::warning('pass is error '.json_encode(array('pass'=>$pass)), array(), 'register');
             throw new CException(Errno::USER_IS_PASS_ERROR);
         }
-
+        if (!Tools::is_valid_mobile_code($mobile_code)) {
+            throw new CException(Errno::USER_IS_SMS_CODE_ERROR);
+        }
+        $dao_mobile_code = new Dao_Default_MobileCodeModel();
+        $ten_minus_ago = date("Y-m-d H:i:s",time()-600);
+        $conds = array(
+            'mobile'=>$mobile,
+            'is_expired'=>0,
+            'type'=>Config::MOBILE_CODE_TYPE_REGIST,
+        );
+        $db_mobile_code = $dao_mobile_code->where($conds)->order('id desc')->find();
+        if(!$db_mobile_code){
+            throw new CException(Errno::USER_IS_SMS_CODE_ERROR);
+        }
+        if($db_mobile_code['dt']<=$ten_minus_ago || $db_mobile_code['left_times']<=0){
+            throw new CException(Errno::USER_IS_SMS_CODE_ERROR);
+        }
+        $up_ret['left_times'] = $db_mobile_code['left_times'] -1; 
+        if($up_ret['left_times'] <=0){
+            $up_ret['is_expired'] = 1 ; 
+        }
+        $dao_mobile_code->update(array('id'=>$db_mobile_code['id']),$up_ret);
+        if($db_mobile_code['code'] != $mobile_code){
+            throw new CException(Errno::USER_IS_SMS_CODE_ERROR);
+        }
         //校验手机号是否已注册
         self::getUidByMobile($mobile);
         $dao_user=new Dao_Default_UserModel();

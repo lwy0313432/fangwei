@@ -9,6 +9,10 @@ class Config{
     const USER_AUDIT_STATUS_AUDIT_FAILED = -1;
     const USER_AUDIT_STATUS_TO_AUDIT = 0;
     const USER_AUDIT_STATUS_AUDIT_SUCCESS = 1;
+
+    const MOBILE_CODE_TYPE_REGIST = 1;//注册
+    const MOBILE_CODE_TYPE_FIND_PASSWD = 2;//找回密码
+    const MOBILE_CODE_TYPE_MODIFY_PASSWD = 3; //修改密码
     //短信相关end
     //喉管管理系统中不需要登录的接口。
     public static $adminNotNeedAuthController=array(

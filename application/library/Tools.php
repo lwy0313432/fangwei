@@ -185,7 +185,7 @@ class Tools
 
     public static function is_valid_mobile_code($code)
     {
-        return preg_match('/^[0-9]{4}$/', $code);
+        return preg_match('/^[0-9]{6}$/', $code);
     }
 
     /*

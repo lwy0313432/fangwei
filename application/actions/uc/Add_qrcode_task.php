@@ -5,7 +5,7 @@
  *    * */
 
 /* vim:set ts=4 sw=4 et fdm=marker: */
-class Product_addAction extends WebBaseAction{
+class Add_qrcode_taskAction extends WebBaseAction{
     public $uid=0;
     public function beforeExecute(){
         $this->uid=$this->getUid();
@@ -15,8 +15,6 @@ class Product_addAction extends WebBaseAction{
         }
     }
     public function run($args=null){
-        $ret = Product::productAdd($this->uid,$_REQUEST);
-        var_export($ret);
+        
     }
-
 }

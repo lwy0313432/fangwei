@@ -17,7 +17,8 @@ class Do_registAction extends WebBaseAction{
         $user = new User();
         $mobile= $this->getRequestParam('mobile');
         $pass= $this->getRequestParam('passwd');
-        $ret = $user->addUser($mobile,$pass);
+        $mobile_code= $this->getRequestParam('mobile_code');
+        $ret = $user->addUser($mobile,$pass,$mobile_code);
         if($ret['uid']){
             $user->createSession($ret['uid']);
         }

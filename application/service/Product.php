@@ -30,6 +30,7 @@ class Product{
             'product_name'=>addslashes($product_name),
             'level'=>$level,
             'due_yield'=>$due_yield,
+            'dt'=>date("Y-m-d H:i:s"),
         );
         $dao_user_product = new Dao_Default_UserProductModel();
         $ret = $dao_user_product->insert($arrIn);
@@ -37,5 +38,17 @@ class Product{
             throw new CException(Errno::DB_ERROR);
         }
         return true;
+    }
+    public static function productList($uid){
+        $uid = intval($uid);
+        if($uid<=0){
+            throw new CException(Errno::ERR_INPUT_PARAMS_INVALID);
+        }
+        $dao_user_product = new Dao_Default_UserProductModel();
+        $ret = $dao_user_product-> where(array("user_id"=>$uid))->select();
+        if(!$ret){
+            return array();
+        }
+        return $ret;
     }
 }

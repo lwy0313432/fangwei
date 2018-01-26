@@ -1,15 +1,4 @@
 <?php
-use Cloudauth\Request\V20171117\GetStatusRequest;
-/**
- * @package yindou
- * @brief  test
- * @author weixiaotong <weixt@yindou.com>
- * @date 2017-12-20
- * @encoding UTF-8
- * @copyright (c) yindou
- */
-set_time_limit(0);
 require_once('common.php');
-$obj=new SendApi();
-//$ret=$obj->getStatus();
-$ret=$obj->getVerifyToken();
+//var_export(SendMsg::do_send_mlrt(18511878663,'您正在进行注册操作，验证码为：1298989'));
+echo SendMsg::genCode();

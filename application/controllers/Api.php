@@ -17,5 +17,6 @@ class ApiController extends Yaf_Controller_Abstract{
         'login'     =>'actions/api/Login.php',
         'logout'    =>'actions/api/Logout.php',
         'is_login'  =>'actions/api/Is_login.php',
+        'send_mobile_code'=>'actions/api/Send_mobile_code.php',
     );
 }
