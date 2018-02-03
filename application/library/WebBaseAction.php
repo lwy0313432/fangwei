@@ -22,6 +22,13 @@ abstract class WebBaseAction extends Yaf_Action_Abstract{
         $this->current_controller  = $current_controller;
         $this->current_action_name = $current_action_name;
         $this->uid = User::getUidFromSession();
+        if($this->uid){
+            $userInfo = User::getUserInfo($this->uid);
+            $this->assign('uid',$this->uid);//全局uid 用来判断用户是否登陆
+            $this->assign('userInfo',$userInfo);
+        }else{
+        
+        }
         if (Util::isProductEnv()) {
             $method = $this->getRequest()->getMethod();
             if ($method != 'POST') {

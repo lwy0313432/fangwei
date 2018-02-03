@@ -11,6 +11,7 @@
             </div>
             <div style='clear:both;height:30px;'></div>
 
+            <form action="" >
             <div  class="login-1-1" style='position:relative;left:-7px'>
                 <span class="" style='color:red'>*</span>手机号码：  <input type="text" id='mobile' name="mobile"  placeholder="&nbsp;&nbsp;输入您的手机号码"/>
             </div>
@@ -32,6 +33,7 @@
             </div>
             <div style='clear:both;height:15px;'></div>
             <input type="submit" name=""  class="logining" value="提交"/>
+              </form>
             <span class="title-3"><a href="#">已有账号?返回登录<a></span>
 
         </div>

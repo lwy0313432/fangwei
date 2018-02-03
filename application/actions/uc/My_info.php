@@ -13,10 +13,11 @@ class My_infoAction extends WebBaseAction{
             header("Location:/");
             die;
         }
+        $this->data = User::getUserInfo($this->uid);
+        $this->assign('userInfo',$this->data);
     }
     public function run($args=null){
-        $uid = $this->uid;
-        $this->data = User::getUserInfo($uid);
+     //   var_dump($this->data);
 	$this->display('uc/my_info.tpl');
    //     var_export($this->data);
     }

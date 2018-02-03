@@ -15,6 +15,7 @@ class Add_qrcode_taskAction extends WebBaseAction{
         }
     }
     public function run($args=null){
-        
+        $this->data = Qrcode::addTask($this->uid,$_REQUEST);
+        var_export($this->data);
     }
 }
