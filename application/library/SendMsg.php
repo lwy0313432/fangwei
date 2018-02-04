@@ -3,7 +3,7 @@
 /**
  * @package yindou
  * @brief  短信发送基类
- * @author weixiaotong <weixt@yindou.com>
+ * @author weixiaotong <liuwy@yindou.com>
  * @date 2017-03-1
  * @encoding UTF-8
  * @copyright (c) yindou

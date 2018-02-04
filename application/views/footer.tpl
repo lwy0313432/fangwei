@@ -64,15 +64,15 @@
 
 
     <div  class="pf">
-       <a href=""> <div  class="" style='background:url(./images/d1.jpg) no-repeat center 10px;background-color:rgb(204,204,204);'>
+       <a href=""> <div  class="" style='background:url(/images/d1.jpg) no-repeat center 10px;background-color:rgb(204,204,204);'>
             <span class="">在线留言</span>
         </div></a>
 
-        <a href=""><div  class="" style='background:url(./images/d2.jpg) no-repeat center 10px;background-color:rgb(204,204,204);'>
+        <a href=""><div  class="" style='background:url(/images/d2.jpg) no-repeat center 10px;background-color:rgb(204,204,204);'>
             <span class="">在线咨询</span>
         </div></a>
 
-        <a href="javascript:scroll(0,0)"><div  class="" style='background:url(./images/d3.jpg) no-repeat center 10px;background-color:rgb(204,204,204);'>
+        <a href="javascript:scroll(0,0)"><div  class="" style='background:url(/images/d3.jpg) no-repeat center 10px;background-color:rgb(204,204,204);'>
             <span class="">返回顶部</span>
         </div></a>
 

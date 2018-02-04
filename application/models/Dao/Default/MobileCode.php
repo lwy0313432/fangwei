@@ -1,7 +1,7 @@
 <?php
 /**
  * @describe:mobile_code表
- * @author: weixt(weixt@yindou.com)
+ * @author: liuwy(liuwy@yindou.com)
  * */
 
 /* vim:set ts=4 sw=4 et fdm=marker: */

@@ -2,7 +2,7 @@
 /**
  * @package yindou
  * @brief  model 中间件 操作
- * @author weixiaotong <weixt@yindou.com>
+ * @author weixiaotong <liuwy@yindou.com>
  * @date 2016-04-10
  * @encoding UTF-8
  * @copyright (c) yindou

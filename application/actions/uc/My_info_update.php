@@ -16,6 +16,12 @@ class My_info_updateAction extends WebBaseAction{
     }
     public function run($args=null){
         $ret = User::updateUserInfo($this->uid,$_REQUEST);
-        var_export($ret);
+        $code=$ret==true?0:1;
+        $res = array(
+            'code'    => $code,
+            'message' => $ret,
+            'data'    =>'' 
+        );
+        echo  json_encode($res);exit;
     }
 }

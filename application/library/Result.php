@@ -3,7 +3,7 @@
 /**
  * @package Library
  * @brief  返回处理结果
- * @author weixiaotong <weixt@yindou.com>
+ * @author weixiaotong <liuwy@yindou.com>
  * @date 2016-03-17
  * @encoding UTF-8
  * @copyright (c) yindou

@@ -11,7 +11,7 @@
                     <span class="title-1"><span class="">*</span>如果公司资料未完善，将无法通过审核，部分业务无法正常开通</span>
                     <div style='clear:both;height:15px;'></div>
 
-                    <form class="layui-form" action="">
+                    <form class="layui-form" id="form1" action="">
                         <div class="layui-form-item">
                           <label class="layui-form-label" style="width:100px">类型</label>
                           <div class="layui-input-block">
@@ -26,7 +26,7 @@
                        </div>
                       </div>
                        <div class="layui-form-item">
-                         <label class="layui-form-label" style="width:100px">身份证号码:</label>
+                         <label class="layui-form-label" style="width:100px">营业执照号:</label>
                         <div class="layui-input-inline">
                          <input type="text" name="id_no" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
                        </div>
@@ -40,9 +40,27 @@
                        <div class="layui-form-item">
                          <label class="layui-form-label" style="width:100px">邮箱:</label>
                         <div class="layui-input-inline">
-                         <input type="text" name="mail" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
+                         <input type="text" name="mail" lay-verify="email" autocomplete="off" placeholder="" class="layui-input">
                        </div>
                       </div>
+                      <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">主营产品:</label>
+                        <div class="layui-input-inline">
+                            <select name="product_type" lay-filter="required">
+                              <option value=""></option>
+                              <option value="1">零食特产</option>
+                              <option value="2">食品、牛奶</option>
+                              <option value="3">酒</option>
+                              <option value="4">香烟</option>
+                              <option value="5">母婴用品</option>
+                              <option value="6">护肤彩妆</option>
+                              <option value="7">家居家纺</option>
+                              <option value="8">医药保健</option>
+                              <option value="9">其他</option>
+                            </select>
+                          </div>
+                      </div>
+                                                                                                    
                        <div class="layui-form-item">
                          <label class="layui-form-label" style="width:120px">法人身份证照片:</label>
                       <div class="layui-upload">
@@ -77,10 +95,16 @@
           var form = layui.form
         //监听提交
           form.on('submit(form1)', function(data){
-              layer.alert(JSON.stringify(data.field), {
-                    title: '最终的提交信息'
-                        })
-                            return false;
+                var data=$("#form1").serialize();
+                $.getJSON('/uc/my_info_update',data,function(ret){
+                    if(ret.code==0){
+                        layer.msg('提交成功');
+                        location.href='/uc/product_list'
+                    }else{
+                        layer.msg(ret.message);
+                    
+                    }
+                })
          });
     })
     </script>

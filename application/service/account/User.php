@@ -178,7 +178,6 @@ class User{
             throw new CException(Errno::USER_INFO_PRODUCT_ERR);
          }
          if ( $type =='company' &&  !Tools::is_company_id_no($id_no) ){
-             echo $id_no;
             throw new CException(Errno::USER_COMPANY_ID_NO_ERR);
          }
          if ( $type =='individal' &&  !Tools::is_id_card_num($id_no) ){

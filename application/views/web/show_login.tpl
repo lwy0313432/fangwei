@@ -42,9 +42,10 @@
                 if(ret.code==0){
                     window.location.href='/uc/my_info';
                 }else{
-                    alert(ret.message);
+        layui.use('layer',function () {
+                layer.msg(ret.message,{time: 1000});
+        });
                 }
-            
             })
             return false;
         });

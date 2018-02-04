@@ -2,7 +2,7 @@
 /**
  * @package yindou
  * @brief  person_loan cron 头部
- * @author weixiaotong <weixt@yindou.com>
+ * @author weixiaotong <liuwy@yindou.com>
  * @date 2017-2-24
  * @encoding UTF-8
  * @copyright (c) yindou

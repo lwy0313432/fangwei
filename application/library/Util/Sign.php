@@ -3,7 +3,7 @@
 /**
  * @package yindou
  * @brief API 验签 基类
- * @author weixiaotong <weixt@yindou.com>
+ * @author weixiaotong <liuwy@yindou.com>
  * @date 2017-12-19
  * @encoding UTF-8
  * @copyright (c) yindou

@@ -2,7 +2,7 @@
 /**
  * @package yindou
  * @brief  发送短信 处理
- * @author weixiaotong <weixt@yindou.com>
+ * @author weixiaotong <liuwy@yindou.com>
  * @date 2017-12-20
  * @encoding UTF-8
  * @copyright (c) yindou

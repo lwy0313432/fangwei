@@ -219,5 +219,9 @@ class Util
         }        
         return true;
     }   
+    // 临时在这补一个是否ajax提交 
+    public static function isAjax(){
+            return ( !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+    }
 }
 /* vi:set ts=4 sw=4 et fdm=marker: */
