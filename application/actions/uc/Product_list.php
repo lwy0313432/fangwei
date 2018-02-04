@@ -16,10 +16,10 @@ class Product_listAction extends WebBaseAction{
         }
     }
     public function run($args=null){
-        $this->data=Product::productList($this->uid);
 
-        $this->assign('list',$this->data);
         if(Util::isAjax()){//新增ajax 判断
+            $this->data=Product::productList($this->uid);
+            $this->assign('list',$this->data);
            $retArr= ['code'=>0,'count'=>30,'data'=>$this->data];
            echo json_encode($retArr);
            exit;

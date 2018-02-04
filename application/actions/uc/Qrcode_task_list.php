@@ -15,8 +15,15 @@ class Qrcode_task_listAction extends WebBaseAction{
         }
     }
     public function run($args=null){
-        $this->data = Qrcode::qrcodeList($this->uid);
-        Tools::pre_echo($this->data);   
+        //Tools::pre_echo($this->data);   
+        if(Util::isAjax()){//新增ajax 判断
+            $this->data = Qrcode::qrcodeList($this->uid);
+           $retArr= ['code'=>0,'count'=>30,'data'=>$this->data['list']];
+           echo json_encode($retArr);
+           exit;
+        }
+
+	    $this->display('uc/qrcode_task_list.tpl');
     }
 }
 

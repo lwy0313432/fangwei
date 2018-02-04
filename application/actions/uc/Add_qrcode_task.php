@@ -15,7 +15,17 @@ class Add_qrcode_taskAction extends WebBaseAction{
         }
     }
     public function run($args=null){
-        $this->data = Qrcode::addTask($this->uid,$_REQUEST);
-        var_export($this->data);
+        if(Util::isAjax()){//新增ajax 判断
+            $ret = Qrcode::addTask($this->uid,$_REQUEST);
+            $code=$ret==true?0:1;
+            $res = array(
+                'code'    => $code,
+                'message' => $ret,
+                'data'    =>'' 
+            );
+            echo  json_encode($res);exit;
+        }
+
+	    $this->display('uc/add_qrcode_task.tpl');
     }
 }
