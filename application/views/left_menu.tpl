@@ -12,7 +12,7 @@
                     <span class="title">二维码管理</span>
                     <ul>
                         <li><a href="/uc/qrcode_task_list"><span class="">●</span>&nbsp;二维码列表</a></li>
-                        <li><a href="/uc/add_qrcode_task"><span class="">●</span>&nbsp;添加任务</a></li> 
+                        <li><a href="/uc/show_add_qrcode_task"><span class="">●</span>&nbsp;添加任务</a></li> 
                     </ul>
                     <div style='clear:both;height:20px;'></div>
                     <span class="title">数据统计</span>

@@ -16,8 +16,8 @@ class Show_add_qrcode_taskAction extends WebBaseAction{
     }
     public function run($args=null){
         $my_product_list = Product::productList($this->uid);
-        var_export($my_product_list);
         $this->assign('my_product_list',$my_product_list);
+        $this->display('uc/add_qrcode_task.tpl');
     }
 }
 

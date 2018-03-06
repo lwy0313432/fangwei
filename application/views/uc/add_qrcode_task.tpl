@@ -12,7 +12,11 @@
                        <div class="layui-form-item">
                          <label class="layui-form-label" style="width:100px">产品ID:</label>
                         <div class="layui-input-inline">
-                         <input type="text" name="user_product_id" lay-verify="required" autocomplete="off" placeholder="产品id" class="layui-input">
+                            <select name='user_product_id' id='user_product_id'>
+                            <{foreach $my_product_list as $item}>
+                                <option value ="<{$item['id']}>"><{$item['product_name']}></option>
+                            <{/foreach}>
+                            </select>
                        </div>
                       </div>
                        <div class="layui-form-item">
