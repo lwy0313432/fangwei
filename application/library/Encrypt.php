@@ -11,7 +11,7 @@ class Encrypt{
     private static $mode = MCRYPT_MODE_ECB;
     public static function encode($str){
         $code = mcrypt_encrypt(self::$cipher,self::$key,$str,self::$mode);
-        return base64_encode($code);
+        return urlencode (base64_encode($code));
     }
     public static function decode($code){
         $code = base64_decode($code);

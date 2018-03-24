@@ -17,7 +17,9 @@ class Qrcode_task_listAction extends WebBaseAction{
     public function run($args=null){
         //Tools::pre_echo($this->data);   
         if(Util::isAjax()){//新增ajax 判断
-            $this->data = Qrcode::qrcodeList($this->uid);
+            $pageNum = isset($_REQUEST['page'])?intval($_REQUEST['page']):1;
+            $limit = isset($_REQUEST['limit'])?intval($_REQUEST['limit']):10;
+           $this->data = Qrcode::qrcodeList($this->uid,$pageNum,$limit);
            $retArr= ['code'=>0,'count'=>30,'data'=>$this->data['list']];
            echo json_encode($retArr);
            exit;

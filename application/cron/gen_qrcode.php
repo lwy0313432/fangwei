@@ -22,7 +22,7 @@ foreach($todo_list as $item){
     if(!is_dir($user_save_path)){
         mkdir($user_save_path);
     }
-    $file_name = $user_save_path."/".$item['id'];
+    $file_name = $user_save_path."/".$item['id'].".txt";
     $index = 0;
     for($index=0; $index<$item['number'];$index++){
         $in_arr = array(
@@ -36,6 +36,8 @@ foreach($todo_list as $item){
         $str = $scan_url."?code=".$encode_qrcode_id."\n";
         file_put_contents($file_name,$str,FILE_APPEND);      
     }
+
+    $dao_qrcode_task->update(array('id'=>$item['id']),array('status'=>'done'));
 
 }
 

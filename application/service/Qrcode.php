@@ -59,17 +59,88 @@ class Qrcode{
         }
         return array('qr_code_task_id'=>$qr_code_task_id);
     }
-    public static function qrcodeList($uid){
+    public static function getById($qrcodeTaskId){
+        $qrcodeTaskId = intval($qrcodeTaskId);
+        $dao_qrcode_task = new Dao_Default_QrcodeTaskModel();
+        $info = $dao_qrcode_task->where(array('id'=> $qrcodeTaskId ))->find();
+        return $info;
+    }
+    public static function getFileName($qrcodeTaskId,$uid){
+        $config  =  Yaf_Registry::get('config');
+        $save_path = $config['qrcode']['save_path'];
+        return $save_path.$uid."/".$qrcodeTaskId.".txt";
+
+    }
+    public static function qrcodeList($uid,$pageNum,$limit=50){
         $dao_qrcode_task = new Dao_Default_QrcodeTaskModel();
         $uid = intval($uid);
+        $limit = intval($limit);
+        $pageNum = intval($pageNum);
+        if($pageNum <= 0){
+            $pageNum=1;
+        }
+        if($limit<=0){
+            $limit = 50;
+        }
+        $offset = ($pageNum-1) * $limit;
         if($uid<=0){
             WLog::warning('uid_error',array('uid'=>$uid,));
             throw new CException(Errno::ERR_INPUT_PARAMS_INVALID);
         }
         $dao_qrcode_task = new Dao_Default_QrcodeTaskModel();
-        $sql = "select qrcode_task.* ,user_product.level ,user_product.product_name from qrcode_task,user_product where qrcode_task.user_product_id=user_product.id and qrcode_task.user_id=$uid";
+        $total = $dao_qrcode_task->Fetch("select count(id) from qrcode_task,user_product where qrcode_task.user_product_id=user_product.id and qrcode_task.user_id=$uid");
+
+        $sql = "select qrcode_task.* ,user_product.level ,user_product.product_name from qrcode_task,user_product where qrcode_task.user_product_id=user_product.id and qrcode_task.user_id=$uid limit $offset,$limit";
         $list = $dao_qrcode_task->Fetch($sql);
-        return array('list'=>$list);
+        return array('total'=>intval($total[0]['count(id)']),'list'=>$list);
+    }
+    public static function checkQrcode($qrcode_id){
+        $qrcode_id = intval($qrcode_id);
+        $dao = new Dao_Default_QrcodeModel();
+        $info = $dao->where(array('id'=>$qrcode_id))->find();
+        if(!$info){
+            throw new CException(Errno::QRCODE_ERR);
+        }
+        $qrcode_task_id = $info['qrcode_task_id'];        
+        $dao_qrcode_task = new Dao_Default_QrcodeTaskModel();
+        $task_info = $dao_qrcode_task->where(array('id'=>$qrcode_task_id))->find();
+        $dao_qrcode_scan = new Dao_Default_QrcodeScanModel();
+        $exist = $dao_qrcode_scan->where(array('qrcode_id'=>$qrcode_id))->find();
+        $scan_num = 0;
+        $last_scan_dt = '';
+        if($exist){
+            $scan_num=$exist['scan_num'];
+            $last_scan_dt=$exist['last_scan_dt'];
+            $arr_up=array(
+                'scan_num'=>$exist['scan_num']+1,
+                'last_scan_dt'=>date("Y-m-d H:i:s"),
+            );
+            $ret = $dao_qrcode_scan->update(array('id'=>$exist['id']),$arr_up);
+            if(!$ret){
+                throw new CException(Errno::INNER_ERR);
+            }
+        }else{
+            $arr_in=array(
+                'user_id'=>$info['user_id'],
+                'user_product_id'=>$task_info['user_product_id'],
+                'location'=>'',
+                'qrcode_id'=>$qrcode_id,
+                'scan_num'=>1,
+                'dt'=>date("Y-m-d H:i:s"),
+                'last_scan_dt'=>date("Y-m-d H:i:s"),
+                'scan_date'=>date("Ymd"),
+            );
+            $ret = $dao_qrcode_scan->insert($arr_in);
+            if(!$ret){
+                throw new CException(Errno::INNER_ERR);
+            }
+        }
+        $res=array(
+            'last_scan_dt'=>$last_scan_dt,
+            'scan_num'=> $scan_num,
+            'random_str'=>$info['random_str'],
+        );
+        return array('detail'=>$res);
     }
 }
 

@@ -33,6 +33,7 @@ class Errno
     const ERR_DB_RECORD_DEL_DENY          = 200011;
     const ERR_DB_CONFING_IS_EMPTY         = 200012;
     const DB_ERROR                        = 200013;  
+    const INNER_ERR                       = 200014;
     
     const PARAM_INVALID = 400001;                   //参数错误
     const ERR_USER_OPERATE_FORIDDEN       = 400003;
@@ -75,6 +76,9 @@ class Errno
     const USER_PRODUCE_DUE_YIELD_INVALID    =400038; //用户产品预计年产量参数不合法
     const USER_PRODUCE_PRODUCT_INVALID      =400039; // 用户产品名称不合法
     const GET_MOBILE_CODE_TYPE_ERR          =400040;//获取短信验证码类型错误 
+    const FILE_DOWNLOAD_FAILED              =400041; // 文件下载失败
+    const FILE_NOT_EXIST                    =400042; // 文件不存在
+    const QRCODE_ERR                        =400043;//二维码错误
 
     const ADMIN_NOT_EXIST = 500001;   
     const ADMIN_PERMISSION_DENY = 500002;   
@@ -131,6 +135,7 @@ class Errno
         self::ADMIN_MENU_NOT_EXIST=>'admin menu不存在',
         self::ADMIN_MENU_HAVE_SUB_MENU=>'该菜单有子菜单，不能删除',
         self::DB_ERROR=>'数据库操作错误',
+        self::INNER_ERR=>'内部错误，请联系客服',
         self::ADMIN_MENU_FLAG_ALREADY_EXIST=>'admin_menu 的flag已存在',
         self::ADMIN_MENU_PARENT_NOT_EXIST=>'父菜单不存在',
         self::ADMIN_MENU_FLAG_NOT_VALID=>'添加的菜单flag不符合规范',
@@ -187,6 +192,9 @@ class Errno
         self::USER_PRODUCE_DUE_YIELD_INVALID=>'用户产品预计年产量参数不合法',
         self::USER_PRODUCE_PRODUCT_INVALID  =>'用户产品名称不合法', 
         self::GET_MOBILE_CODE_TYPE_ERR      =>'获取短信验证码类型错误', 
+        self::FILE_DOWNLOAD_FAILED          =>'文件下载失败',
+        self::FILE_NOT_EXIST                =>'文件不存在',
+        self::QRCODE_ERR                    =>'二维码错误',
     );
     public static function getMessage($code){
         $message = '';
