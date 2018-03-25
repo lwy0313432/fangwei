@@ -104,6 +104,12 @@ class Qrcode{
         $qrcode_task_id = $info['qrcode_task_id'];        
         $dao_qrcode_task = new Dao_Default_QrcodeTaskModel();
         $task_info = $dao_qrcode_task->where(array('id'=>$qrcode_task_id))->find();
+        $dao_user_product = new Dao_Default_UserProductModel();
+        $product_info = $dao_user_product->where(array('id'=>intval($task_info['user_product_id'])))->find();
+        if(!$product_info){
+            WLog::warning('qrcode_scan,product_info_err',array('qrocde_id'=>$qrcode_id));
+            throw new CException(Errno::INNER_ERR);
+        }
         $dao_qrcode_scan = new Dao_Default_QrcodeScanModel();
         $exist = $dao_qrcode_scan->where(array('qrcode_id'=>$qrcode_id))->find();
         $scan_num = 0;
@@ -117,12 +123,14 @@ class Qrcode{
             );
             $ret = $dao_qrcode_scan->update(array('id'=>$exist['id']),$arr_up);
             if(!$ret){
+                WLog::warning('update_qrcode_scan_err',array('exist'=>$exist,'arr_up'=>$arr_up));
                 throw new CException(Errno::INNER_ERR);
             }
         }else{
             $arr_in=array(
                 'user_id'=>$info['user_id'],
-                'user_product_id'=>$task_info['user_product_id'],
+                'user_product_id'=>$product_info['id'],
+                'product_name'=>$product_info['product_name'],
                 'location'=>'',
                 'qrcode_id'=>$qrcode_id,
                 'scan_num'=>1,
@@ -132,6 +140,7 @@ class Qrcode{
             );
             $ret = $dao_qrcode_scan->insert($arr_in);
             if(!$ret){
+                WLog::warning('insert_qrcode_scan_err',array('qrcode_id'=>$qrcode_id,'arr_in'=>$arr_in));
                 throw new CException(Errno::INNER_ERR);
             }
         }

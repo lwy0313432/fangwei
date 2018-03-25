@@ -21,7 +21,7 @@
                         
                                 <a href=""><span class="">●</span>&nbsp;产品维度</a>
                                  <p>
-                                     <a href="">- 防伪校验次数</a><br/>
+                                     <a href="/uc/statistics_date">- 每天校验次数</a><br/>
                                  </p>       
                         
                         

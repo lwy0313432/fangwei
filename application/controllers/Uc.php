@@ -17,5 +17,6 @@ class UcController extends Yaf_Controller_Abstract
         'add_qrcode_task'=>'actions/uc/Add_qrcode_task.php',  
         'qrcode_task_list'=>'actions/uc/Qrcode_task_list.php',
         'download_qrcode_file'=>'actions/uc/Download_qrcode_file.php',
+        'statistics_date'=>'actions/uc/Statistics_date.php',
     );
 }
