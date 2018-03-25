@@ -88,11 +88,11 @@ class Qrcode{
             throw new CException(Errno::ERR_INPUT_PARAMS_INVALID);
         }
         $dao_qrcode_task = new Dao_Default_QrcodeTaskModel();
-        $total = $dao_qrcode_task->Fetch("select count(id) from qrcode_task,user_product where qrcode_task.user_product_id=user_product.id and qrcode_task.user_id=$uid");
+        $total = $dao_qrcode_task->Fetch("select count(qrcode_task.id) from qrcode_task,user_product where qrcode_task.user_product_id=user_product.id and qrcode_task.user_id=$uid");
 
         $sql = "select qrcode_task.* ,user_product.level ,user_product.product_name from qrcode_task,user_product where qrcode_task.user_product_id=user_product.id and qrcode_task.user_id=$uid limit $offset,$limit";
         $list = $dao_qrcode_task->Fetch($sql);
-        return array('total'=>intval($total[0]['count(id)']),'list'=>$list);
+        return array('total'=>intval($total[0]['count(qrcode_task.id)']),'list'=>$list);
     }
     public static function checkQrcode($qrcode_id){
         $qrcode_id = intval($qrcode_id);

@@ -52,7 +52,7 @@ class QrcodeScan{
             }
         }
         $dao_qrcode_scan = new Dao_Default_QrcodeScanModel();
-        $ret = $dao_qrcode_scan->fetch("select count(id) as count,user_product_id,scan_date,product_name from qrcode_scan where user_id=$uid and scan_date between $start_date and $end_date group by user_product_id , scan_date");
+        $ret = $dao_qrcode_scan->fetch("select count(id) as count,user_product_id,scan_date,product_name from qrcode_scan where user_id=$uid and scan_date between $start_date and $end_date group by   scan_date,user_product_id");
         $res = array(
             'list'=>$ret,
             'start_date'=>$start_date,

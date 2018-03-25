@@ -20,7 +20,7 @@ class Qrcode_task_listAction extends WebBaseAction{
             $pageNum = isset($_REQUEST['page'])?intval($_REQUEST['page']):1;
             $limit = isset($_REQUEST['limit'])?intval($_REQUEST['limit']):10;
            $this->data = Qrcode::qrcodeList($this->uid,$pageNum,$limit);
-           $retArr= ['code'=>0,'count'=>30,'data'=>$this->data['list']];
+           $retArr= ['code'=>0,'count'=>$this->data['total'],'data'=>$this->data['list']];
            echo json_encode($retArr);
            exit;
         }

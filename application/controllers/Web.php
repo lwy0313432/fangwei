@@ -11,6 +11,7 @@ class WebController extends Yaf_Controller_Abstract{
         'show_service'=>'actions/web/Show_service.php',
         'do_regist'=>'actions/web/Do_regist.php',
         'qrcode'=>'actions/web/Qrcode.php',
+        'show_qrcode'=>'actions/web/Show_qrcode.php',
     );
 }
 /* vim:set ts=4 sw=4 et fdm=marker: */
