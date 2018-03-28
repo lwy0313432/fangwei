@@ -33,6 +33,7 @@ abstract class AdminBaseAction extends Yaf_Action_Abstract
         AdminAuthCheck::check($this->adminId,$current_action_name,$current_controller); //action name 就是flag 
         header('Content-Type:text/html; charset=utf-8');
 
+	$this->backend_config();
         $this->assign("adminId", $this->adminId);
         
         return true;
@@ -40,6 +41,7 @@ abstract class AdminBaseAction extends Yaf_Action_Abstract
 
     protected function beforeExecute()
     {
+	
     }
 
     protected function afterExecute()
@@ -116,5 +118,25 @@ abstract class AdminBaseAction extends Yaf_Action_Abstract
     {
         $this->getView()->display($tpl);
     }
+    public function backend_config(){
+        $module=strtolower($this->getRequest()->getModuleName());
+       //vadump($module);
+        $action=strtolower($this->getRequest()->getActionName());
+        $controller=strtolower($this->getRequest()->getControllerName());
+        $cdnurl= 'http://' . $_SERVER['HTTP_HOST'];
+        $config=[
+            'site'=>['name'=>'CRM','cdnurl'=>$cdnurl,'version'=>'1.1.0','timezone'=>'Asia/Shanghai','languages'=>''],
+            'upload'=>['cdnurl'=>$cdnurl,'uploadurl'=>$cdnurl.'/upload/upload','maxsize'=>'10mb','multipart'=>[],'multiple'=>false,'mimetype'=>'*'],
+            'modulename'=>'index',
+            'controllername'=>$controller,
+            'actionname'=>$action,
+            'jsname'=>'sup/'.$controller,
+            'moduleurl'=>'../',
+            'language'=>'',
+            'fastadmin'=>['login_background'=>'/assets/img/loginbg.jpg'],
+            'referer'=>null,
+        ];
+        $this->assign("backend_config",json_encode($config));
+    } 
 }
 /* vi:set ts=4 sw=4 et fdm=marker: */
