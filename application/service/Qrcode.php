@@ -95,11 +95,21 @@ class Qrcode{
         return array('total'=>intval($total[0]['count(qrcode_task.id)']),'list'=>$list);
     }
     public static function checkQrcode($qrcode_id){
+        $res=array(
+            'last_scan_dt'=>'',
+            'scan_num'=> 0,
+            'random_str'=>'',
+            'qrcode_id'=>0,
+            'product_name'=>'',
+            'qrcode_dt'=>'',
+            'is_true'=>'no',
+        );
         $qrcode_id = intval($qrcode_id);
         $dao = new Dao_Default_QrcodeModel();
         $info = $dao->where(array('id'=>$qrcode_id))->find();
         if(!$info){
-            throw new CException(Errno::QRCODE_ERR);
+            $res['is_true']='no';
+            return $res;
         }
         $qrcode_task_id = $info['qrcode_task_id'];        
         $dao_qrcode_task = new Dao_Default_QrcodeTaskModel();
@@ -108,7 +118,7 @@ class Qrcode{
         $product_info = $dao_user_product->where(array('id'=>intval($task_info['user_product_id'])))->find();
         if(!$product_info){
             WLog::warning('qrcode_scan,product_info_err',array('qrocde_id'=>$qrcode_id));
-            throw new CException(Errno::INNER_ERR);
+            return $res;
         }
         $dao_qrcode_scan = new Dao_Default_QrcodeScanModel();
         $exist = $dao_qrcode_scan->where(array('qrcode_id'=>$qrcode_id))->find();
@@ -148,8 +158,12 @@ class Qrcode{
             'last_scan_dt'=>$last_scan_dt,
             'scan_num'=> $scan_num,
             'random_str'=>$info['random_str'],
+            'product_name'=>$product_info['product_name'],
+            'qrcode_dt'=>$info['dt'],
+            'is_true'=>'yes',
+            'qrcode_id'=>$qrcode_id,
         );
-        return array('detail'=>$res);
+        return $res;
     }
 }
 

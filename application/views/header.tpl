@@ -8,7 +8,7 @@
 <link href="/css/Public.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
 <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
 <script type="text/javascript" src="/layui/layui.js" charset="utf-8"></script>
 </head>
@@ -19,8 +19,9 @@
            <div  class="head-1-1">
                 <div style='clear:both;height:15px;'></div>
                 <{if isset($userInfo)}>
-                <div  class="head-1-2" style="width:150px;">
+                <div  class="head-1-2" style="width:200px;">
                         欢迎:<a href="/uc/my_info"><{$userInfo['mobile']}></a>登陆
+                        <a href="javascript:void(0);" id="logout">退出</a>
                 </div>
                 <{else}>
 

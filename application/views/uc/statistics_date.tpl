@@ -7,50 +7,35 @@
         <{include file="left_menu.tpl"}>
                 <div  class="i_22">
                     <span class="title">首页 / 统计分析 </span>
+                    <br/>
+                    <form id='form1' action='/uc/statistics_date' method='post' >
+                        <select name='user_product_id' onchange="change()">
+                        <{foreach $data['user_product_list'] as $product}>
+                            <option value=<{$product['id']}> <{if $product['id']== $data['user_product_id']}>selected<{/if}>><{$product['product_name']}></option>
+                        <{/foreach}>
+                        </select>
                     <div id="container" style="min-width: 310px; height: 800px; margin: 0 auto"></div>
+                    </form>
                 </div>
     </div>
     <script>
+    function change(){
+        $("#form1").submit();
+    }
     $(document).ready(function(){
-    var data = <{$count_list}>;
-    start_date = data.start_date;
-    list = data.list;
+    var list = <{$list}>;
     x_arr=[];
-    y_arr=[];
-    product_name_arr=[];
-    j=0;
-    product_temp =[];
-    for(i=0;i<list.length;i++){
-        x_arr[i]= list[i].scan_date ;
-        temp = list[i].product_name;
-        index = $.inArray(temp,product_name_arr );
-        if(index < 0){//不在数组中
-            product_name_arr[j] = temp;
-            y_arr[j]={name : temp,data:[]};
-            product_temp[j]=[];
-            product_temp[j].push(list[i].count);
-            j++;
-        }else{
-            product_temp[index].push(list[i].count);
-        }
+    y_arr={'name':'','data':[]};
+   temp=[];
+   for(i=0;i<list.length;i++){
+        x_arr.push(list[i]['scan_date']);
+        temp[i]=parseInt(list[i]['count']);
     }
-    j=0;
-    for(i=0;i<list.length;i++){
-        for(j=0;j< y_arr.length;j++){
-            temp = list[i].product_name;
-            index = $.inArray(temp,product_name_arr );
-            if(index == j){
-                y_arr[j].data.push(list[i].count);
-            }else{
-                y_arr[j].data.push(0);
-            }
-        }
-    }
-console.log(y_arr);
+    y_arr={name:list[0]['product_name'],data:temp};
     Highcharts.chart('container', {
         chart: {
             type: 'line',
-            inverted: true
+            //inverted: true
         },
         title: {
             text: '每天的扫码次数'
@@ -76,7 +61,7 @@ console.log(y_arr);
             }
         },
 
-        series:y_arr
+        series:[y_arr]
         /*[{
                 name: 'Tokyo',
                 data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]

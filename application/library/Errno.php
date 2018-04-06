@@ -79,6 +79,8 @@ class Errno
     const FILE_DOWNLOAD_FAILED              =400041; // 文件下载失败
     const FILE_NOT_EXIST                    =400042; // 文件不存在
     const QRCODE_ERR                        =400043;//二维码错误
+    const QRCODE__ID_NOT_EXIST              =400044; //二维码不存在
+    const  ADDRESS_INVALID                  =400045;//地址格式错误
 
     const ADMIN_NOT_EXIST = 500001;   
     const ADMIN_PERMISSION_DENY = 500002;   
@@ -195,6 +197,8 @@ class Errno
         self::FILE_DOWNLOAD_FAILED          =>'文件下载失败',
         self::FILE_NOT_EXIST                =>'文件不存在',
         self::QRCODE_ERR                    =>'二维码错误',
+        self::QRCODE__ID_NOT_EXIST          =>'二维码不存在',
+        self::ADDRESS_INVALID               =>'地址格式错误',
     );
     public static function getMessage($code){
         $message = '';

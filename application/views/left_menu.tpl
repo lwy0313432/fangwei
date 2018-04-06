@@ -21,7 +21,8 @@
                         
                                 <a href=""><span class="">●</span>&nbsp;产品维度</a>
                                  <p>
-                                     <a href="/uc/statistics_date">- 每天校验次数</a><br/>
+                                     <a href="/uc/statistics_date">- 每天扫码次数</a><br/>
+                                     <a href="/uc/statistics_location">- 每地区扫码次数</a><br/>
                                  </p>       
                         
                         

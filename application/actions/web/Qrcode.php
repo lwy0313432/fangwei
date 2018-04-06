@@ -22,6 +22,7 @@ class QrcodeAction extends WebBaseAction{
             throw new CException(Errno::QRCODE_ERR);
         }
         $detail = Qrcode::checkQrcode($qrcodeId);
-        Tools::pre_echo($detail);
+        $this->assign('detail',$detail);
+        $this->display('web/qrcode.tpl'); 
     }
 }

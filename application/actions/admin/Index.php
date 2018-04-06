@@ -9,7 +9,8 @@ class indexAction extends AdminBaseAction{
     public function beforeExecute(){
     }
     public function run($args=null){
-        //$adminInfo = Admin::getAdminInfo(1);
+        $adminInfo = Admin::getAdminInfo(1);
+//var_dump($adminInfo);exit;
         $this->display('admin/index.tpl');
     }
 }

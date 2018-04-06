@@ -17,8 +17,12 @@ class Statistics_dateAction extends WebBaseAction{
         $this->assign('userInfo',$this->data);
     }
     public function run($args=null){
-        $data = QrcodeScan::statsticsByDate($this->uid);
-        $this->assign('count_list',json_encode($data));
+
+        $user_product_id = isset($_REQUEST['user_product_id'])?intval($_REQUEST['user_product_id']) : 0;
+        $data = QrcodeScan::statsticsByDate($this->uid,$user_product_id);
+        $this->assign('list',json_encode($data['list']));
+
+        $this->assign('data',$data);
 	    $this->display('uc/statistics_date.tpl');
     }
 }

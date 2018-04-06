@@ -21,5 +21,6 @@ class ApiController extends Yaf_Controller_Abstract{
         'product_list'=>'actions/api/Product_list.php',
         'statistics_location'=>'actions/api/Statistics_location.php',
         'statistics_date'=>'actions/api/Statistics_date.php',
+        'qrcode_address_save'=>'actions/api/Qrcode_address_save.php',
     );
 }

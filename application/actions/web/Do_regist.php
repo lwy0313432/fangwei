@@ -21,7 +21,8 @@ class Do_registAction extends WebBaseAction{
         $ret = $user->addUser($mobile,$pass,$mobile_code);
         if($ret['uid']){
             $user->createSession($ret['uid']);
+            throw new CException(Errno::SUCCESS);
+          //  header('Location:/uc/my_info');
         }
-        var_export($ret);
     }
 }

@@ -84,6 +84,15 @@
 
 
 <script type="text/javascript" src="/js/common.js"></script>
+<script>
+  $(function(){
+	$("#logout").click(function(){
+            $.getJSON('/api/logout',function(ret){
+                    window.location.href='/';
+	  });
+	})
+  });
+</script>
 </body>
 </html>
 
