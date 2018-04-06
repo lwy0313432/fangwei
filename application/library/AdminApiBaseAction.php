@@ -99,7 +99,7 @@ abstract class AdminApiBaseAction extends Yaf_Action_Abstract{
     {
         $res = array(
             'code'    => $this->code,
-            'message' => $this->message,
+            'msg' => $this->message,//修改message为 msg 兼容后台框架
             'data'    => is_null($this->data) ? new ArrayObject() : $this->data ,
         );
 

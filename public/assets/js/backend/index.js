@@ -395,8 +395,9 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form'], functi
 
             //为表单绑定事件
             Form.api.bindevent($("#login-form"), function (data) {
-                localStorage.setItem("lastlogin", JSON.stringify({id: data.id, username: data.username, avatar: data.avatar}));
-                location.href = Backend.api.fixurl(data.url);
+//                localStorage.setItem("lastlogin", JSON.stringify({id: data.id, username: data.username, avatar: data.avatar}));
+                //location.href = Backend.api.fixurl(data.url);
+                location.href = Backend.api.fixurl('/admin/index');
             });
         }
     };

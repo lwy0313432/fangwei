@@ -9,14 +9,16 @@ class AdminAuthCheck
 {
     public static function check($adminId,$flag,$controller=''){
         if($controller == 'admin' && $flag=='index'){  // url= /admin/index 时也不做权限判断
-            return true;
+           // return true;
         }
         if(in_array($flag,Config::$adminNotNeedAuthController)){
             return true;
         }
         $adminId = intval($adminId);
         if($adminId<=0){
-            throw new CException(Errno::ADMIN_NOT_LOGIN);
+            header("Location:/admin/login");//未登陆拦截
+            die;
+          //  throw new CException(Errno::ADMIN_NOT_LOGIN);
         }
         $adminObj = new Dao_Default_AdminModel();
         $adminInfo = $adminObj->where(array('id'=>$adminId))->find();

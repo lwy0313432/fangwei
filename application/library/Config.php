@@ -16,6 +16,7 @@ class Config{
     //短信相关end
     //喉管管理系统中不需要登录的接口。
     public static $adminNotNeedAuthController=array(
+        'login',
         'dologin',
         'islogin',
         'logout',

@@ -19,7 +19,14 @@ class CException extends Exception
                 'data'    =>'' 
             );
             echo  json_encode($res);exit;
-        }
+        }else{
+            $res = array(
+                'code'    =>$this->code,
+                'message' =>$this->message,
+                'data'    =>'' 
+            );
+            echo  json_encode($res);exit;
+	}
     }
 }
 /* vi:set ts=4 sw=4 et fdm=marker: */

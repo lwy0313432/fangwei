@@ -27,8 +27,8 @@ class Admin
             throw new CException(Errno::ADMIN_USERNAME_INVALID);
         }
         if (!self::check_passwd($passwd)) {
-            WLog::warning('密码不合法',array('passwd'=>$passwd));
-            throw new CException(Errno::ADMIN_PASSWORD_INVALID);
+//            WLog::warning('密码不合法',array('passwd'=>$passwd));
+ //           throw new CException(Errno::ADMIN_PASSWORD_INVALID);
         }
         //$passwd = self::encode_passwd($passwd);
 

@@ -8,6 +8,7 @@
 
 class AdminController extends Yaf_Controller_Abstract{
     public $actions=array(
-        'index'=>'actions/admin/Index.php'
+        'index'=>'actions/admin/Index.php',
+        'login'=>'actions/admin/Login.php'
     );
 }

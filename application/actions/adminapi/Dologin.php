@@ -17,5 +17,9 @@ class DologinAction extends AdminApiBaseAction{
         $vcode=$this->getRequestParam('vcode','');
     
         $this->data = Admin::dologin($username, $password,$vcode);
+	if($this->data){
+        $this->code=1;
+        $this->message = '成功';//兼容前段框架 修改 成功0为1  
+	}
     }
 }
