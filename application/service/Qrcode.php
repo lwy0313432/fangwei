@@ -12,9 +12,9 @@ class Qrcode{
             WLog::warning('uid_error',array('uid'=>$uid,'param'=>$param));
             throw new CException(Errno::ERR_INPUT_PARAMS_INVALID);
         }
-        $daoUserInfo = new Dao_Default_UserInfoModel();
-        $user_info =$daoUserInfo->where(array('user_id'=>$uid))->find(); 
-        if(!$user_info || $user_info['autid_status'] != Config::USER_AUDIT_STATUS_AUDIT_SUCCESS){
+        $daoUser = new Dao_Default_UserModel();
+        $user_info =$daoUser->where(array('id'=>$uid))->find(); 
+        if(!$user_info || $user_info['audit_status'] != Config::USER_AUDIT_STATUS_AUDIT_SUCCESS){
             WLog::warning('user_info_error',array('user_info'=>$user_info,'param'=>$param));
             throw new CException(Errno::USER_INFO_AUDIT_STATUS_ERR);
             
@@ -91,6 +91,25 @@ class Qrcode{
         $total = $dao_qrcode_task->Fetch("select count(qrcode_task.id) from qrcode_task,user_product where qrcode_task.user_product_id=user_product.id and qrcode_task.user_id=$uid");
 
         $sql = "select qrcode_task.* ,user_product.level ,user_product.product_name from qrcode_task,user_product where qrcode_task.user_product_id=user_product.id and qrcode_task.user_id=$uid limit $offset,$limit";
+        $list = $dao_qrcode_task->Fetch($sql);
+        return array('total'=>intval($total[0]['count(qrcode_task.id)']),'list'=>$list);
+    }
+    public static function qrcodeListByAll($pageNum,$limit=50){
+        $dao_qrcode_task = new Dao_Default_QrcodeTaskModel();
+        $uid = intval($uid);
+        $limit = intval($limit);
+        $pageNum = intval($pageNum);
+        if($pageNum <= 0){
+            $pageNum=1;
+        }
+        if($limit<=0){
+            $limit = 50;
+        }
+        $offset = ($pageNum-1) * $limit;
+        $dao_qrcode_task = new Dao_Default_QrcodeTaskModel();
+        $total = $dao_qrcode_task->Fetch("select count(qrcode_task.id) from qrcode_task,user_product where qrcode_task.user_product_id=user_product.id ");
+
+        $sql = "select qrcode_task.* ,user_product.level ,user_product.product_name from qrcode_task,user_product where qrcode_task.user_product_id=user_product.id  limit $offset,$limit";
         $list = $dao_qrcode_task->Fetch($sql);
         return array('total'=>intval($total[0]['count(qrcode_task.id)']),'list'=>$list);
     }

@@ -79,17 +79,14 @@ class User{
      }
      public static function getUserInfo($uid){
         $dao_user=new Dao_Default_UserModel();
-        $daoUserInfo = new Dao_Default_UserInfoModel();
         $uid=intval($uid);
         if(!$uid){
             return array();
         }
         $user=$dao_user->where(array('id'=>$uid))->find();
-        $userInfo = $daoUserInfo->where(array("user_id"=>$uid))->find();
         if(!$user){
             return array();
         }
-        $user['other_info'] = $userInfo; 
         return $user;
      }
      private static function checkVcode($vcode){
@@ -159,7 +156,6 @@ class User{
          $uid= intval($uid);
          $dao_user = new Dao_Default_UserModel();
 
-         $dao_user_info = new Dao_Default_UserInfoModel();
          $user = $dao_user->where(array("id"=>$uid))->find();
          if(!$user){
             throw new CException(Errno::USER_NOT_EXIST);
@@ -183,7 +179,6 @@ class User{
          if ( $type =='individal' &&  !Tools::is_id_card_num($id_no) ){
             throw new CException(Errno::USER_ID_NO_IS_ERROR);
          }
-         $user_info = $dao_user_info->where(array("user_id"=>$uid))->find();
          $arr_up = array(
              'type'=>$type,
              'real_name'=>addslashes($real_name),
@@ -193,12 +188,8 @@ class User{
              'product_type'=>$product_type,
              'dt'=>date("Y-m-d H:i:s"),
          );
-         if(!$user_info){ //新增
-             $arr_up['user_id']=$uid;
-             $ret = $dao_user_info->insert($arr_up);
-         }else{
-            $ret = $dao_user_info->update(array("user_id"=>$uid),$arr_up);
-         }  
+         
+         $ret = $dao_user->update(array("id"=>$uid),$arr_up);
          if(!$ret){
             throw new CException(Errno::DB_ERROR);
          }

@@ -130,7 +130,7 @@ abstract class AdminBaseAction extends Yaf_Action_Abstract
             'modulename'=>'index',
             'controllername'=>$controller,
             'actionname'=>$action,
-            'jsname'=>'sup/'.$controller,
+            'jsname'=>'backend/'.$controller,
             'moduleurl'=>'../',
             'language'=>'',
             'fastadmin'=>['login_background'=>'/assets/img/loginbg.jpg'],

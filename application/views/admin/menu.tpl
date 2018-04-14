@@ -17,7 +17,7 @@
 
          <li class=" treeview"><a href="javascript:;" addtabs="1" url="javascript:;" py="@py" pinyin="@pinyin"><i class="fa fa-group"></i> <span>业务管理</span> <span class="pull-right-container"><i class="fa fa-angle-left"></i> </span></a> 
             <ul class="treeview-menu">
-              <li class=""><a href="OrderUnderline/info?ref=addtabs" addtabs="2" url="/OrderUnderline/info?style_type=2" py="@py" pinyin="@pinyin"><i class="fa fa-user"></i> <span>二维码列表</span> <span class="pull-right-container"> </span></a> </li>
+              <li class=""><a href="/admin/qrcode_task_list?ref=addtabs" addtabs="2" url="/admin/qrcode_task_list?style_type=2" py="@py" pinyin="@pinyin"><i class="fa fa-user"></i> <span>二维码列表</span> <span class="pull-right-container"> </span></a> </li>
               <li class=""><a href="OrderUnderline/list?ref=addtabs" addtabs="3" url="/OrderUnderline/list" py="@py" pinyin="@pinyin"><i class="fa fa-group"></i> <span>产品列表</span> <span class="pull-right-container"> </span></a> </li>
               <li class=""><a href="OrderUnderline/info?ref=addtabs" addtabs="2" url="/OrderUnderline/info?style_type=2" py="@py" pinyin="@pinyin"><i class="fa fa-user"></i> <span>扫描记录</span> <span class="pull-right-container"> </span></a> </li>
               </ul></li>

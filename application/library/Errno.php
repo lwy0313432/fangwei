@@ -81,6 +81,7 @@ class Errno
     const QRCODE_ERR                        =400043;//二维码错误
     const QRCODE__ID_NOT_EXIST              =400044; //二维码不存在
     const  ADDRESS_INVALID                  =400045;//地址格式错误
+    const USER_AUDIT_PARAM_ERR              =400046; //用户审核参数错误
 
     const ADMIN_NOT_EXIST = 500001;   
     const ADMIN_PERMISSION_DENY = 500002;   
@@ -199,6 +200,7 @@ class Errno
         self::QRCODE_ERR                    =>'二维码错误',
         self::QRCODE__ID_NOT_EXIST          =>'二维码不存在',
         self::ADDRESS_INVALID               =>'地址格式错误',
+        self::USER_AUDIT_PARAM_ERR          =>'用户审核参数错误',
     );
     public static function getMessage($code){
         $message = '';

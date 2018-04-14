@@ -8,9 +8,9 @@
 class Product{
     public static function productAdd($uid,$param){
         $uid = intval($uid);
-        $dao_user_info = new Dao_Default_UserInfoModel();
-        $user_info = $dao_user_info->where(array("user_id"=>$uid))->find();
-        if(!$user_info || $user_info['autid_status'] !=Config::USER_AUDIT_STATUS_AUDIT_SUCCESS){
+        $dao_user = new Dao_Default_UserModel();
+        $user_info = $dao_user->where(array("id"=>$uid))->find();
+        if(!$user_info || $user_info['audit_status'] !=Config::USER_AUDIT_STATUS_AUDIT_SUCCESS){
             throw new CException(Errno::USER_INFO_AUDIT_STATUS_ERR);
         }
         $product_name = isset($param['product_name']) ? $param['product_name'] : ''; 

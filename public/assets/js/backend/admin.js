@@ -41,6 +41,47 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             // 为表格绑定事件
             Table.api.bindevent(table);
         },
+        qrcode_task_list: function () {
+            // 初始化表格参数配置
+            Table.api.init({
+                extend: {
+                    index_url: '/admin/qrcode_task_list',
+                    add_url: '/admin/add',
+                    edit_url: '/admin/edit',
+                    del_url: '/admin/del',
+                    multi_url: '/admin/multi',
+                }
+            });
+
+            var table = $("#table");
+
+            // 初始化表格
+            table.bootstrapTable({
+                url: $.fn.bootstrapTable.defaults.extend.index_url,
+                columns: [
+                    [
+                        {field: 'state', checkbox: true },
+                        {field: 'id', title: 'ID'},
+                        {field: 'user_id', title: '用户id'},
+                        {field: 'product_name', title: '产品'},
+                        {field: 'level', title: '级别'},
+                        {field: 'number', title: '数量'},
+                        {field: 'batch_no', title: '二维码编号' },
+                        {field: 'made_date', title: '时间'},
+                        {field: 'status', title: __("Status"), formatter: Table.api.formatter.status},
+                        {field: 'operate', title: __('Operate'), table: table, events: Table.api.events.operate, formatter: function (value, row, index) {
+                   //             if(row.id == Config.admin.id){
+                   //                 return '';
+                    //            }
+                                return Table.api.formatter.operate.call(this, value, row, index);
+                            }}
+                    ]
+                ]
+            });
+
+            // 为表格绑定事件
+            Table.api.bindevent(table);
+        },
         add: function () {
             Form.api.bindevent($("form[role=form]"));
         },

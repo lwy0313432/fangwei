@@ -7,6 +7,7 @@
 /* vim:set ts=4 sw=4 et fdm=marker: */
 class AdminapiController extends Yaf_Controller_Abstract{
     public $actions=array(
+        'user_list'=>'actions/adminapi/User_list.php',
         'dologin'=>'actions/adminapi/Dologin.php',
         'logout'=>'actions/adminapi/Logout.php',
         'islogin'=>'actions/adminapi/Islogin.php',
