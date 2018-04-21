@@ -91,6 +91,14 @@
                     window.location.href='/';
 	  });
 	})
+	var pn=window.location.pathname;
+	$('.head-1-1 li a').each(function(){
+		var hr=$(this).attr('href');
+		if(hr==pn){
+		  $(this).parent().addClass('act');
+		   return false; 
+		}
+	 })
   });
 </script>
 </body>

@@ -5,7 +5,7 @@
  *    * */
 
 /* vim:set ts=4 sw=4 et fdm=marker: */
-class Show_serviceAction extends WebBaseAction{
+class AboutAction extends WebBaseAction{
     public $uid=0;
     public function beforeExecute(){
         $this->uid=$this->getUid();
@@ -14,13 +14,6 @@ class Show_serviceAction extends WebBaseAction{
         }
     }
     public function run($args=null){
-        $type = isset($_REQUEST['type'])?intval($_REQUEST['type']):1;
-        $this->assign('type',$type);
-	if($type==1){
-        $this->display('web/show_service.tpl');
-	}else{
-        $this->display('web/std_money.tpl');
-
-	}
+        $this->display('web/about.tpl');
     }
 }

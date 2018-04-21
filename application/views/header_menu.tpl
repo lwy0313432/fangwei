@@ -36,12 +36,12 @@
                 <{/if}>
                 <div style='clear:both;height:15px;'></div>
                 <ul>
-                    <li class='act'><a href="/">首页</a></li>       
+                    <li class=''><a href="/">首页</a></li>       
                     <li><a href="/web/show_service">服务介绍</a></li>    
-                    <li><a href="">防伪产品</a></li> 
-                    <li><a href="">关于我们</a></li>  
+                   <!-- <li><a href="">防伪产品</a></li> -->
+                    <li><a href="/web/about">关于我们</a></li>  
                     <li><a href="">成功案例</a></li>  
-                    <li><a href="">联系我们</a></li>
+                    <li><a href="/web/linkus">联系我们</a></li>
                 </ul>
            </div>
         </div>
