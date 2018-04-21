@@ -34,7 +34,7 @@
             <div style='clear:both;height:15px;'></div>
             <input type="submit" name=""  class="logining" value="提交"/>
               </form>
-            <span class="title-3"><a href="#">已有账号?返回登录<a></span>
+            <span class="title-3"><a href="/web/show_login">已有账号?返回登录<a></span>
 
         </div>
         

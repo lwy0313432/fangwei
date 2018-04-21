@@ -26,7 +26,7 @@
             <div style='clear:both;height:15px;'></div>
             <input type="submit" name="" id="submit"  class="logining" value="登陆"/>
              </form>
-            <span class="title-3">未注册？请先<a href="#">注册<a></span>
+            <span class="title-3">未注册？请先<a href="/web/show_regist">注册<a></span>
          
 
 
