@@ -34,15 +34,15 @@ class User{
      //校验手机号是否已注册
      public static function getUidByMobile($mobile){
          if(!$mobile){
-             WLog::warning('mobile is error '.json_encode(array('mobile'=>$mobile)), array(), 'register');
-             throw new CException(Errno::USER_IS_MOBILE_ERROR);
+             return 0;
          }
          $dao_user=new Dao_Default_UserModel();
          $user_info=$dao_user->where(array('mobile'=>$mobile))->find();
          if($user_info){
-             throw new CException(Errno::USER_IS_MOBILE_REGISTER_ERROR);
+             return $user_info['id'];
+         }else{
+            return 0;
          }
-         return true;
      }
      //登录
      public static function login($mobile,$pass,$vcode){
@@ -136,7 +136,10 @@ class User{
             throw new CException(Errno::USER_IS_SMS_CODE_ERROR);
         }
         //校验手机号是否已注册
-        self::getUidByMobile($mobile);
+        $exist_uid = self::getUidByMobile($mobile);
+        if($exist_uid){
+            throw new CException(Errno::USER_IS_MOBILE_REGISTER_ERROR);
+        }
         $dao_user=new Dao_Default_UserModel();
         $in_user_arr=array(
             'password'=>md5($pass),

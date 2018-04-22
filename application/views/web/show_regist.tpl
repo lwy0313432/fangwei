@@ -52,13 +52,15 @@
         if($('#btn_span').attr('isOff')=='false'){
             return false
         }
-            resetCode();
             $.ajax({
                 type: 'POST',
                 url:'/api/send_mobile_code',
                 data: {type:1,vcode:vcode,mobile:$("#mobile").val()},
                 success: function(ret){
                 if(ret.code==0){
+            var src='/Vcode/index?'+Math.random();
+            $("#vcode").attr('src',src);
+            resetCode();
                 }else{
 		var src='/Vcode/index?'+Math.random();
 		$("#vcode").attr('src',src);

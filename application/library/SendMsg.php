@@ -25,6 +25,10 @@ class SendMsg
         }else{
             throw new CException(Errno::GET_MOBILE_CODE_TYPE_ERR);
         }
+        $exist_id = User::getUidByMobile($mobile);
+        if($exist_id){
+            throw new CException(Errno::USER_IS_MOBILE_REGISTER_ERROR);
+        }
         $daoMobileCode = new Dao_Default_MobileCodeModel();
         $arr_conds = array('mobile'=>$mobile,'type'=>$type,'is_expired'=>0);
         $lastMobileCode = $daoMobileCode->where($arr_conds)->order('id desc')->find();
