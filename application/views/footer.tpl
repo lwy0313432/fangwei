@@ -9,7 +9,7 @@
               </p>  
 
 
-              <p style='margin-left:80px'>
+              <p style='margin-left:60px'>
                  <span class="title">服务介绍</span>
                    <a href="">二维码防伪</a><br/>
                    <a href=""> 溯源查询</a><br/>
@@ -18,13 +18,13 @@
               </p>  
 
               
-              <p style='margin-left:80px'>
+              <p style='margin-left:60px'>
                  <span class="title">防伪产品</span>
                   <a href="">防伪贴膜</a><br/>
                   <a href="">防伪油墨</a><br/>
               </p>  
 
-              <p style='margin-left:80px'>
+              <p style='margin-left:60px'>
                  <span class="title">成功案例</span>
                 <a href="">酒类</a><br/>
                 <a href="">烟类</a><br/>
@@ -32,12 +32,12 @@
                 <a href="">其它</a><br/>
               </p>  
 
-               <p style='margin-left:80px'>
+               <p style='margin-left:60px'>
                 <span class="title">联系我们</span>
-                地址：北京海淀区朝阳区139号二层<br/>
-                电话：010-23235232<br/>
-                邮箱：service.main@shanshi.cn<br/>
-                网站：www.shanshi.cn><br/>
+	地址：北京市海淀区中关村东路66号1号楼<br/>
+	邮箱：chenbo@34idea.com<br/>
+	电话：15910232933<br/>
+	网站：www.34idea.com<br/>
               </p>  
 
                <p style='margin-left:65px'>

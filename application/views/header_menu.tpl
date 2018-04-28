@@ -38,7 +38,7 @@
                 <ul>
                     <li class=''><a href="/">首页</a></li>       
                     <li><a href="/web/show_service">服务介绍</a></li>    
-                   <!-- <li><a href="">防伪产品</a></li> -->
+                    <li><a href="https://item.taobao.com/item.htm?spm=0.7095261.0.0.28a41debNB4MRP&id=568091620633">防伪产品</a></li> 
                     <li><a href="/web/about">关于我们</a></li>  
                     <li><a href="">成功案例</a></li>  
                     <li><a href="/web/linkus">联系我们</a></li>
